@@ -1,0 +1,54 @@
+/* Global Styles */
+#root {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  height: 100vh;
+}
+
+.list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.list-item {
+  border: 1px solid var(--color-border);
+  margin: 2px;
+  border-radius: 10px;
+  padding: 8px 5px;
+}
+
+.selected {
+  margin-bottom: 0px;
+  border: 3px solid var(--color-select);
+  transition: 0.2s;
+}
+
+.selectionBtn {
+  border: none;
+  padding: 0.6em 2em;
+}
+
+.voted-c {
+  margin: 25vh 10vw;
+  padding: 30px 50px;
+  border-radius: 10px;
+  font-size: medium;
+  border: 1px solid grey;
+  background-color: rgba(0, 0, 0, 0.336);
+}
+
+/* Footer Styles */
+footer {
+  position: fixed;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  width: calc(100vw - 3rem);
+}
+
+footer > div > button {
+  width: 90vw;
+  background-color: var(--color-select);
+}

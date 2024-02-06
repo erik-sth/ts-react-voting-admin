@@ -1,0 +1,43 @@
+/* Global Variables */
+:root {
+  --color-bg: #242424;
+  --color-btn-bg-pri: #1a1a1a;
+  --color-btn-bg-sec: rgb(5, 88, 197);
+  --color-font: #ffffff;
+  --color-border: grey;
+  --color-select: rgb(57, 165, 72);
+  --color-pink: #ad108b;
+  --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --line-height: 1.5;
+  --font-weight: 400;
+  --max-width: 500px;
+  --color-scheme: dark;
+}
+
+/* Global Styles */
+:root {
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  font-weight: var(--font-weight);
+  max-width: var(--max-width);
+  color-scheme: var(--color-scheme);
+  background-color: var(--color-bg);
+}
+
+/* Heading Styles */
+h1 {
+  font-size: 2em;
+}
+
+/* Button Styles */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-btn-bg-pri);
+  color: var(--color-font);
+  transition: border-color 0.25s;
+}

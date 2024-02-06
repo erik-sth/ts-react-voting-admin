@@ -1,0 +1,32 @@
+import { Contestant } from "../useContestent";
+
+interface Props {
+  selectContestant: (contestant: Contestant) => void;
+  isSelected: (id: string) => boolean;
+  renderData: Contestant[];
+}
+
+const Voting = ({ selectContestant, renderData, isSelected }: Props) => {
+  return (
+    <section className="section">
+      <div>
+        <ul className="list">
+          {renderData &&
+            renderData.map((c) => (
+              <li
+                key={c._id}
+                className={
+                  isSelected(c._id) ? "list-item selected" : "list-item"
+                }
+                onClick={() => selectContestant(c)}
+              >
+                {c.name}
+              </li>
+            ))}
+        </ul>
+      </div>
+    </section>
+  );
+};
+
+export default Voting;
