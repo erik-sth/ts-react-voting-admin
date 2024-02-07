@@ -80,25 +80,34 @@ function App() {
 
   return (
     <>
-      <nav>
+      <button
+        onClick={() => {
+          localStorage.clear();
+        }}
+      >
+        Reset
+      </button>
+      <nav className="container">
         <h1>Ballkönig/-in</h1>
       </nav>
-      <SwitchGender
-        gender={selectedGender}
-        setGender={(gender) => setSelectedGender(gender)}
-      />
-      <Voting
-        isSelected={isSelected}
-        renderData={renderData}
-        selectContestant={selectContestant}
-      />
-      {selectedGender === "m" && votedMale && selectedMale && (
-        <Voted name={selectedMale?.name} />
-      )}
-      {selectedGender === "f" && votedFemale && selectedFemale && (
-        <Voted name={selectedFemale.name} />
-      )}
-      <footer>
+      <section className="container">
+        <SwitchGender
+          gender={selectedGender}
+          setGender={(gender) => setSelectedGender(gender)}
+        />
+        <Voting
+          isSelected={isSelected}
+          renderData={renderData}
+          selectContestant={selectContestant}
+        />
+        {selectedGender === "m" && votedMale && selectedMale && (
+          <Voted name={selectedMale?.name} />
+        )}
+        {selectedGender === "f" && votedFemale && selectedFemale && (
+          <Voted name={selectedFemale.name} />
+        )}
+      </section>
+      <footer className="container">
         {renderButton() && (
           <div>
             <p>Änderung der Wahl nicht möglich.</p>
