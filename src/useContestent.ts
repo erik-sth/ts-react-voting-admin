@@ -3,7 +3,7 @@ export interface Contestant {
   gender: "m" | "f";
   name: string;
 }
-class UseContestent {
+class UseContestant {
   data: Contestant[] = [];
   maleContestant: Contestant[] = [];
   femaleContestant: Contestant[] = [];
@@ -31,4 +31,4 @@ class UseContestent {
     }
   }
 }
-export default UseContestent;
+export default UseContestant;

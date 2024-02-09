@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import UseContestent, { Contestant } from "./useContestent";
+import UseContestant, { Contestant } from "./useContestent";
 import SwitchGender from "./components/SelectGender";
-import Voting from "./components/Voting";
+import Voting from "./components/SelectContestant";
 import Voted from "./components/Voted";
 
 function App() {
-  const data = new UseContestent();
+  const data = new UseContestant();
 
   const [selectedMale, setSelectMale] = useState<Contestant | null>(null);
   const [selectedFemale, setSelectFemale] = useState<Contestant | null>(null);
