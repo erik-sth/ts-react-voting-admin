@@ -1,4 +1,4 @@
-import "./SwitchGender.css";
+import "./SelectGender.css";
 interface Props {
   gender: "m" | "f";
   setGender: (gender: "m" | "f") => void;

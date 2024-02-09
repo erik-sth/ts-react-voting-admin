@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import UseContestent, { Contestant } from "./useContestent";
-import SwitchGender from "./components/SwitchGender";
+import SwitchGender from "./components/SelectGender";
 import Voting from "./components/Voting";
 import Voted from "./components/Voted";
 
