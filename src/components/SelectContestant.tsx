@@ -6,7 +6,11 @@ interface Props {
   renderData: Contestant[];
 }
 
-const Voting = ({ selectContestant, renderData, isSelected }: Props) => {
+const SelectContestant = ({
+  selectContestant,
+  renderData,
+  isSelected,
+}: Props) => {
   return (
     <section className="section">
       <div>
@@ -29,4 +33,4 @@ const Voting = ({ selectContestant, renderData, isSelected }: Props) => {
   );
 };
 
-export default Voting;
+export default SelectContestant;
