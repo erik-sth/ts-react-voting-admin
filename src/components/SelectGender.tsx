@@ -3,7 +3,7 @@ interface Props {
   gender: "m" | "f";
   setGender: (gender: "m" | "f") => void;
 }
-const SwitchGender = ({ gender, setGender }: Props) => {
+const SelectGender = ({ gender, setGender }: Props) => {
   return (
     <section className="radio-input">
       <div
@@ -27,4 +27,4 @@ const SwitchGender = ({ gender, setGender }: Props) => {
   );
 };
 
-export default SwitchGender;
+export default SelectGender;

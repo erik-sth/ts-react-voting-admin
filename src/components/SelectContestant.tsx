@@ -1,4 +1,4 @@
-import { Contestant } from "../useContestent";
+import { Contestant } from "../hooks/useContestant";
 
 interface Props {
   selectContestant: (contestant: Contestant) => void;
@@ -6,7 +6,11 @@ interface Props {
   renderData: Contestant[];
 }
 
-const Voting = ({ selectContestant, renderData, isSelected }: Props) => {
+const SelectContestant = ({
+  selectContestant,
+  renderData,
+  isSelected,
+}: Props) => {
   return (
     <section className="section">
       <div>
@@ -29,4 +33,4 @@ const Voting = ({ selectContestant, renderData, isSelected }: Props) => {
   );
 };
 
-export default Voting;
+export default SelectContestant;
