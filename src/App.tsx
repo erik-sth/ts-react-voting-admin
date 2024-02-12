@@ -1,10 +1,10 @@
 import "./App.css";
-import Voting from "./pages/Voting";
-
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 function App() {
   return (
     <>
-      <Voting />
+      <RouterProvider router={router} />
     </>
   );
 }
