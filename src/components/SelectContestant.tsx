@@ -1,4 +1,4 @@
-import { Contestant } from "../useContestent";
+import { Contestant } from "../hooks/useContestant";
 
 interface Props {
   selectContestant: (contestant: Contestant) => void;
