@@ -1,4 +1,5 @@
 import { Contestant } from "../hooks/useContestant";
+import "./SelectContestant.css";
 
 interface Props {
   selectContestant: (contestant: Contestant) => void;
