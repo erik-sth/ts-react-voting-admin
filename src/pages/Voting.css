@@ -1,0 +1,30 @@
+#root {
+  max-width: 500px;
+}
+.voted-c {
+  margin: 25vh 10vw;
+  padding: 30px 50px;
+  border-radius: 10px;
+  font-size: medium;
+  border: 1px solid grey;
+  background-color: rgba(0, 0, 0, 0.336);
+}
+
+/* Footer Styles */
+footer {
+  position: fixed;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  width: calc(100vw - 3rem);
+}
+
+footer > div > button {
+  width: 90vw;
+  max-width: 500px;
+  background-color: var(--color-select);
+}
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}

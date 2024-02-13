@@ -13,7 +13,11 @@
   --max-width: 500px;
   --color-scheme: dark;
 }
-
+#root {
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
 /* Global Styles */
 :root {
   font-family: var(--font-family);
@@ -40,4 +44,11 @@ button {
   background-color: var(--color-btn-bg-pri);
   color: var(--color-font);
   transition: border-color 0.25s;
+  max-height: 50px;
+}
+
+.heading-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 90vw;
 }

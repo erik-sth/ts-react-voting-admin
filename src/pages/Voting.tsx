@@ -2,6 +2,7 @@ import useContestant from "../hooks/useContestant";
 import SelectGender from "../components/SelectGender";
 import Voted from "../components/Voted";
 import SelectContestant from "../components/SelectContestant";
+import "./Voting.css";
 
 const Voting = () => {
   const {
@@ -39,7 +40,9 @@ const Voting = () => {
       >
         Reset
       </button>
-
+      <nav className="container">
+        <h1>Ballkönig/-in</h1>
+      </nav>
       <section className="container">
         <SelectGender
           gender={selectedGender}
