@@ -1,5 +1,6 @@
 /* Radio Input Styles */
 .radio-input {
+  max-height: 45px;
   --container_width: min(87.5vw, 450px);
   position: relative;
   display: flex;
@@ -9,6 +10,7 @@
   color: var(--color-font);
   width: var(--container_width);
   overflow: hidden;
+  border: none;
 }
 
 .radio-input div {

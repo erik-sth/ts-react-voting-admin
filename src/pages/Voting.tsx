@@ -1,7 +1,7 @@
 import useContestant from "../hooks/useContestant";
-import SelectGender from "../components/SelectGender";
-import Voted from "../components/Voted";
-import SelectContestant from "../components/SelectContestant";
+import SelectGender from "../components/Voting/SelectGender";
+import Voted from "../components/Voting/Voted";
+import SelectContestant from "../components/Voting/SelectContestant";
 import "./Voting.css";
 
 const Voting = () => {

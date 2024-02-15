@@ -1,0 +1,24 @@
+.split {
+  display: grid;
+  grid-template-columns: 60vw 30vw;
+}
+.split > * {
+  margin: 3px;
+}
+section {
+  border: 1px solid grey;
+  border-radius: 10px;
+  height: 80vh;
+}
+li {
+  list-style-type: none;
+}
+.height35 {
+  height: 35vh;
+}
+.open {
+  color: rgb(0, 156, 0);
+}
+.closed {
+  color: red;
+}

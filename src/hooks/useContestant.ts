@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 export interface Contestant {
   _id: string;
   name: string;
-  gender: string;
+  gender: "m" | "f";
 }
 
 const useContestant = () => {
