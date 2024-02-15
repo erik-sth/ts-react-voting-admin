@@ -6,6 +6,7 @@ import "./Voting.css";
 
 const Voting = () => {
   const {
+    display,
     renderData,
     selectedGender,
     selectedMale,
@@ -30,7 +31,8 @@ const Voting = () => {
       (selectedGender === "f" && selectedFemale?._id === contestantId)
     );
   }
-
+  if (display === "banned")
+    return <div className="voted-c">Already voted from this device.</div>;
   return (
     <>
       <button

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import apiClient from "../services/api-client";
 import { UseLocalStorage } from "./useLocalstorage";
 import { useParams } from "react-router-dom";
+import { AxiosError } from "axios";
 
 export interface Contestant {
   _id: string;
@@ -21,6 +22,8 @@ const useContestant = () => {
 
   const [votedMale, setVotedMale] = useState(false);
   const [votedFemale, setVotedFemale] = useState(false);
+
+  const [display, setDisplay] = useState<"voting" | "banned">("voting");
 
   const manageLocalStorage = useMemo(
     () => new UseLocalStorage(projectId as string),
@@ -88,7 +91,9 @@ const useContestant = () => {
           setVotedMale(true);
           manageLocalStorage.setMaleVoted(_id, name);
         })
-        .catch((err) => console.log(err));
+        .catch((err: AxiosError) => {
+          if (err.response?.status === 403) setDisplay("banned");
+        });
     }
     if (selectedGender === "f" && selectedFemale) {
       const { _id, name } = selectedFemale;
@@ -98,7 +103,9 @@ const useContestant = () => {
           setVotedFemale(true);
           manageLocalStorage.setFemaleVoted(_id, name);
         })
-        .catch((err) => console.log(err));
+        .catch((err: AxiosError) => {
+          if (err.response?.status === 403) setDisplay("banned");
+        });
     }
   }
 
@@ -112,6 +119,7 @@ const useContestant = () => {
     setSelectedGender,
     selectContestant,
     vote,
+    display,
   };
 };
 
