@@ -7,7 +7,7 @@ export interface Project {
     useTime: boolean;
     votingStartDayAndTime: Date;
     votingEndDayAndTime: Date;
-    overwriteVoteTime: boolean;
+    votingEnabled: boolean;
     limitVotesToOnePerIp: boolean;
   };
 }

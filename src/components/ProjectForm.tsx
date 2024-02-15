@@ -12,7 +12,7 @@ const ProjectForm: React.FC<Props> = ({ create }: Props) => {
       useTime: false,
       votingStartDayAndTime: new Date(),
       votingEndDayAndTime: new Date(),
-      overwriteVoteTime: false,
+      votingEnabled: true,
       limitVotesToOnePerIp: false,
     },
   });
