@@ -12,9 +12,8 @@ import { useParams } from "react-router-dom";
 
 const dataVotes: ColumnProps<Vote>[] = [
   { title: "_id", key: "contestandId" },
-  { key: "gender", title: "Gender" },
-  { key: "Ip", title: "publicIpAddress" },
-  { key: "remotePort", title: "remotePort" },
+  { title: "Gender", key: "gender" },
+  { title: "Ip", key: "publicIpAddress" },
 ];
 const dataContestant: ColumnProps<AdminContestant>[] = [
   {
