@@ -6,7 +6,8 @@ export interface Vote {
   _id: string;
   contestandId: string;
   projectId: string;
-  ipAddress: string;
+  publicIpAddress: string;
+  remotePort: string;
   gender: "m" | "F";
 }
 
