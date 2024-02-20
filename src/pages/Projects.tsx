@@ -47,14 +47,14 @@ const tableData: ColumnProps<Project>[] = [
 const Projects = () => {
   const { data, isLoading, create } = useProjects();
   if (isLoading) return <h1>Loading</h1>;
-  if (!data || data.length === 0) return <h1>No projects available!</h1>;
 
   return (
     <div>
       <h1>Projects</h1>
       <div className="split">
         <section>
-          <Table data={data} columns={tableData} />
+{data.length === 0 ?  <h1>No projects available!</h1> :
+          <Table data={data} columns={tableData} />}
         </section>
         <section>
           <ProjectForm create={create} />
