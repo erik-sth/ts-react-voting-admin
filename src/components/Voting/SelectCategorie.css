@@ -35,16 +35,28 @@
   transition: 0.3s ease;
 }
 
-.radio-input .selectedGender ~ .selection {
+.radio-input .selectCategorie ~ .selection {
   background-color: rgb(11 117 223);
   display: inline-block;
 }
 
-.radio-input .selectedGender:nth-child(1) ~ .selection {
+.radio-input .selectCategorie:nth-child(1) ~ .selection {
   transform: translateX(calc(var(--container_width) * 0 / 2));
 }
 
-.radio-input .selectedGender:nth-child(2) ~ .selection {
+.radio-input .selectCategorie:nth-child(2) ~ .selection {
   transform: translateX(calc(var(--container_width) * 1 / 2));
+}
+
+.radio-input .pink ~ .selection {
   background-color: var(--color-pink);
+}
+.radio-input .blue ~ .selection {
+  background-color: rgb(11 117 223);
+}
+.radio-input .white ~ .selection {
+  background-color: white;
+}
+.radio-input .white {
+  color: black;
 }

@@ -1,69 +1,68 @@
-import useContestant from "../hooks/useContestant";
-import SelectGender from "../components/Voting/SelectGender";
+import SelectCategorie from "../components/Voting/SelectCategorie";
 import Voted from "../components/Voting/Voted";
 import SelectContestant from "../components/Voting/SelectContestant";
+import useVoting from "../hooks/voting/VotingPageManager";
 import "./Voting.css";
 
 const Voting = () => {
   const {
     display,
     renderData,
-    selectedGender,
-    selectedMale,
-    selectedFemale,
-    votedFemale,
-    votedMale,
+    categories,
     vote,
-    setSelectedGender,
-    selectContestant,
-  } = useContestant();
+    currentSelected,
+    selectedCategories,
+    changeSelectedContestantPerCategorie,
+    setSelectedCategories,
+    currentVoted,
+  } = useVoting();
 
-  function renderButton() {
-    return (
-      (selectedGender === "m" && selectedMale && !votedMale) ||
-      (selectedGender === "f" && selectedFemale && !votedFemale)
-    );
-  }
+  const handleReset = () => {
+    localStorage.clear();
+  };
 
-  function isSelected(contestantId: string) {
-    return (
-      (selectedGender === "m" && selectedMale?._id === contestantId) ||
-      (selectedGender === "f" && selectedFemale?._id === contestantId)
-    );
-  }
-  if (display === "banned")
-    return <div className="voted-c">Already voted from this device.</div>;
   return (
     <>
-      <button
-        onClick={() => {
-          localStorage.clear();
-        }}
-      >
-        Reset
-      </button>
+      <button onClick={handleReset}>Reset</button>
       <nav className="container">
         <h1>Ballkönig/-in</h1>
       </nav>
-      <section className="container">
-        <SelectGender
-          gender={selectedGender}
-          setGender={(gender) => setSelectedGender(gender)}
+      {categories.map((c, i) => (
+        <SelectCategorie
+          key={i}
+          setCategorie={setSelectedCategories}
+          selectedCategories={selectedCategories}
+          categories={[
+            {
+              key: c.option1.key,
+              title: c.option1.name,
+              color: c.option1.color,
+            },
+            {
+              key: c.option2.key,
+              title: c.option2.name,
+              color: c.option2.color,
+            },
+          ]}
         />
-        <SelectContestant
-          isSelected={isSelected}
-          renderData={renderData}
-          selectContestant={selectContestant}
-        />
-        {selectedGender === "m" && votedMale && selectedMale && (
-          <Voted name={selectedMale?.name} />
-        )}
-        {selectedGender === "f" && votedFemale && selectedFemale && (
-          <Voted name={selectedFemale.name} />
-        )}
-      </section>
+      ))}
+      {display === "voting" && (
+        <section className="container">
+          <SelectContestant
+            isSelected={(id) => currentSelected?._id === id}
+            renderData={renderData}
+            selectContestant={changeSelectedContestantPerCategorie}
+          />
+        </section>
+      )}
+      {display === "voted" && currentVoted && (
+        <Voted name={currentVoted?.name} />
+      )}{" "}
+      {display === "banned" && (
+        <div className="voted-c">Already voted from this device.</div>
+      )}
       <footer className="container">
-        {renderButton() && (
+        {currentSelected && !currentVoted && display !== "banned" && (
           <div>
             <p>Änderung der Wahl nicht möglich.</p>
             <button onClick={vote}>Final Abstimmen</button>

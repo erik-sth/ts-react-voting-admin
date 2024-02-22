@@ -1,11 +1,11 @@
 import useData from "./useData";
 export interface Contestant {
   _id: string;
-  gender: "m" | "f";
+  categories: string[];
   name: string;
 }
 
-type ServerExpectedContestantData = Pick<Contestant, "name" | "gender">;
+type ServerExpectedContestantData = Pick<Contestant, "name" | "categories">;
 
 const useProject = (projectId: string) =>
   useData<Contestant, ServerExpectedContestantData>("/contestant" + projectId);

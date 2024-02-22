@@ -5,11 +5,14 @@ import { useParams } from "react-router-dom";
 export interface AdminContestant {
   _id: string;
   name: string;
-  gender: "m" | "f";
+  categories: string[];
   countedVotes: number;
   projectId: string;
 }
-export type ServerExpectContestant = Pick<AdminContestant, "gender" | "name">;
+export type ServerExpectContestant = Pick<
+  AdminContestant,
+  "categories" | "name"
+>;
 const useContestantAdmin = () => {
   const { projectId } = useParams();
   const [renderData, setRenderData] = useState<AdminContestant[]>([]);
