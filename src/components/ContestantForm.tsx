@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { ServerExpectContestant } from "../hooks/useContestantAdmin";
+import { Project } from "../hooks/useProjects";
 
 interface Props {
   create: (contestant: ServerExpectContestant) => void;
+  project: Project;
 }
 
-const ContestantForm = ({ create }: Props) => {
+const ContestantForm = ({ create, project }: Props) => {
   const [name, setName] = useState("");
   const [gender, setGender] = useState<"m" | "f">("m");
 
@@ -14,7 +16,7 @@ const ContestantForm = ({ create }: Props) => {
     // Create contestant object
     const newContestant: ServerExpectContestant = {
       name: name,
-      gender: gender,
+      categories: [],
     };
     // Call create function with the contestant object
     create(newContestant);

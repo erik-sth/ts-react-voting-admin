@@ -8,6 +8,7 @@ interface Props {
 const ProjectForm: React.FC<Props> = ({ create }: Props) => {
   const [newProject, setNewProject] = useState<ServerExpectedProjectData>({
     name: "",
+    categories: [],
     config: {
       useTime: false,
       votingStartDayAndTime: new Date(),
@@ -78,6 +79,17 @@ const ProjectForm: React.FC<Props> = ({ create }: Props) => {
             value={newProject.name}
             onChange={handleInputChange}
           />
+        </div>
+        <ul></ul>
+        <div>
+          <label htmlFor="title">title</label>
+          <input type="text" id="title" />
+          <div></div>
+          <label htmlFor="a">option a</label>
+          <input type="text" id="a" />
+          <label htmlFor="b">option b</label>
+          <input type="text" id="b" />
+          <button>add</button>
         </div>
         <div>
           <label htmlFor="votesLimitedPerIp">Limit votes per IP:</label>

@@ -13,7 +13,7 @@ const CategoriesProvider = () => {
 
   // startup default values
   useEffect(() => {
-    setSelectedCategories(categories.map((c) => c.option1.key) || []);
+    setSelectedCategories(categories?.map((c) => c.option1.key) || []);
   }, [categories]);
 
   return {

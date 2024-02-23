@@ -27,25 +27,26 @@ const Voting = () => {
       <nav className="container">
         <h1>Ballkönig/-in</h1>
       </nav>
-      {categories.map((c, i) => (
-        <SelectCategorie
-          key={i}
-          setCategorie={setSelectedCategories}
-          selectedCategories={selectedCategories}
-          categories={[
-            {
-              key: c.option1.key,
-              title: c.option1.name,
-              color: c.option1.color,
-            },
-            {
-              key: c.option2.key,
-              title: c.option2.name,
-              color: c.option2.color,
-            },
-          ]}
-        />
-      ))}
+      {categories &&
+        categories.map((c, i) => (
+          <SelectCategorie
+            key={i}
+            setCategorie={setSelectedCategories}
+            selectedCategories={selectedCategories}
+            categories={[
+              {
+                key: c.option1.key,
+                title: c.option1.name,
+                color: c.option1.color,
+              },
+              {
+                key: c.option2.key,
+                title: c.option2.name,
+                color: c.option2.color,
+              },
+            ]}
+          />
+        ))}
       {display === "voting" && (
         <section className="container">
           <SelectContestant
@@ -57,7 +58,7 @@ const Voting = () => {
       )}
       {display === "voted" && currentVoted && (
         <Voted name={currentVoted?.name} />
-      )}{" "}
+      )}
       {display === "banned" && (
         <div className="voted-c">Already voted from this device.</div>
       )}
