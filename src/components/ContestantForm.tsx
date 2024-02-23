@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ServerExpectContestant } from "../hooks/useContestantAdmin";
 import { Project } from "../hooks/useProjects";
+import SelectCategorie from "./Voting/SelectCategorie";
 
 interface Props {
   create: (contestant: ServerExpectContestant) => void;
@@ -9,7 +10,6 @@ interface Props {
 
 const ContestantForm = ({ create, project }: Props) => {
   const [name, setName] = useState("");
-  const [gender, setGender] = useState<"m" | "f">("m");
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -22,7 +22,6 @@ const ContestantForm = ({ create, project }: Props) => {
     create(newContestant);
     // Clear form fields
     setName("");
-    setGender("m"); // Reset gender to default
   };
 
   return (
@@ -40,16 +39,26 @@ const ContestantForm = ({ create, project }: Props) => {
           />
         </div>
         <div>
-          <label htmlFor="gender">Gender</label>
-          <select
-            id="gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value as "m" | "f")}
-            required
-          >
-            <option value="m">Male</option>
-            <option value="f">Female</option>
-          </select>
+          {project?.categories &&
+            project?.categories.map((c, i) => (
+              <SelectCategorie
+                key={i}
+                setCategorie={() => console.log("not implemented")}
+                selectedCategories={[]}
+                categories={[
+                  {
+                    key: c.option1.key,
+                    title: c.option1.name,
+                    color: c.option1.color,
+                  },
+                  {
+                    key: c.option2.key,
+                    title: c.option2.name,
+                    color: c.option2.color,
+                  },
+                ]}
+              />
+            ))}
         </div>
         <button type="submit">Submit</button>
       </form>

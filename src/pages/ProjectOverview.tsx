@@ -54,7 +54,7 @@ const ProjectOverview = () => {
           )}
         </section>
         <section>
-          <ContestantForm create={createContestant} />
+          <ContestantForm create={createContestant} project={projectData[0]} />
           <h2>Setting</h2>
           <ProjectForm create={create} />
         </section>
