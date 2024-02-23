@@ -63,7 +63,7 @@ const Voting = () => {
         <div className="voted-c">Already voted from this device.</div>
       )}
       <footer className="container">
-        {currentSelected && !currentVoted && display !== "banned" && (
+        {currentSelected && display === "voting" && !currentVoted && (
           <div>
             <p>Änderung der Wahl nicht möglich.</p>
             <button onClick={vote}>Final Abstimmen</button>
