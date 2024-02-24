@@ -57,6 +57,7 @@ const ContestantForm = ({ create, project }: Props) => {
               <div key={categories.title}>
                 <label htmlFor={categories.title}>{categories.title}</label>
                 <select
+                  value={newContestant.categories}
                   onChange={(e) => {
                     function filterOut() {
                       return newContestant.categories.filter(
