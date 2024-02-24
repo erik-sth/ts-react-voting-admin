@@ -8,6 +8,7 @@ import useContestantAdmin, {
 } from "../hooks/useContestantAdmin";
 import useProjects from "../hooks/useProjects";
 import { useParams } from "react-router-dom";
+import ProjectUpdate from "./../components/ProjectUpdate";
 
 const dataVotes: ColumnProps<Vote>[] = [
   { title: "_id", key: "contestandId" },
@@ -55,6 +56,7 @@ const ProjectOverview = () => {
         <section>
           <ContestantForm create={createContestant} project={projectData[0]} />
           <h2>Setting</h2>
+          <ProjectUpdate project={projectData[0]} />
         </section>
       </div>
     </div>
