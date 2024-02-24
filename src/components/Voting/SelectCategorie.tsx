@@ -1,10 +1,11 @@
 import "./SelectCategorie.css";
+import { colorSelection } from "../../hooks/useProjects";
 interface Props {
   selectedCategories: string[];
   categories: {
     key: string;
     title: string;
-    color: "blue" | "pink" | "white";
+    color: colorSelection;
   }[];
 
   setCategorie: (categories: string[]) => void;
@@ -15,6 +16,11 @@ const SelectCategorie = ({
   setCategorie,
   categories,
 }: Props) => {
+  function filterOut() {
+    return selectedCategories.filter(
+      (c) => c !== categories[0].key && c !== categories[1].key
+    );
+  }
   function isSelected(key: string): boolean {
     return (
       selectedCategories?.filter(
@@ -22,21 +28,21 @@ const SelectCategorie = ({
       )[0] === key
     );
   }
-
-  function filterOut() {
-    return selectedCategories.filter(
-      (c) => c !== categories[0].key && c !== categories[1].key
-    );
+  function setToOption1() {
+    setCategorie([...filterOut(), categories[0].key]);
+  }
+  function setToOption2() {
+    setCategorie([...filterOut(), categories[1].key]);
   }
   return (
-    <section className="radio-input">
+    <section className="categorie-input">
       <div
         className={
           isSelected(categories[0].key)
             ? `selectionBtn selectCategorie ${categories[0].color}`
             : "selectionBtn"
         }
-        onClick={() => setCategorie([categories[0].key, ...filterOut()])}
+        onClick={setToOption1}
       >
         {categories[0].title}
       </div>
@@ -46,7 +52,7 @@ const SelectCategorie = ({
             ? `selectionBtn selectCategorie ${categories[1].color}`
             : "selectionBtn "
         }
-        onClick={() => setCategorie([categories[1].key, ...filterOut()])}
+        onClick={setToOption2}
       >
         {categories[1].title}
       </div>

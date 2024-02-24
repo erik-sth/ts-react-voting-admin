@@ -1,5 +1,5 @@
-/* Radio Input Styles */
-.radio-input {
+/* categorie Input Styles */
+.categorie-input {
   max-height: 45px;
   --container_width: min(87.5vw, 450px);
   position: relative;
@@ -13,7 +13,7 @@
   border: none;
 }
 
-.radio-input div {
+.categorie-input div {
   width: 100%;
   padding: 10px;
   display: flex;
@@ -35,28 +35,28 @@
   transition: 0.3s ease;
 }
 
-.radio-input .selectCategorie ~ .selection {
+.categorie-input .selectCategorie ~ .selection {
   background-color: rgb(11 117 223);
   display: inline-block;
 }
 
-.radio-input .selectCategorie:nth-child(1) ~ .selection {
+.categorie-input .selectCategorie:nth-child(1) ~ .selection {
   transform: translateX(calc(var(--container_width) * 0 / 2));
 }
 
-.radio-input .selectCategorie:nth-child(2) ~ .selection {
+.categorie-input .selectCategorie:nth-child(2) ~ .selection {
   transform: translateX(calc(var(--container_width) * 1 / 2));
 }
 
-.radio-input .pink ~ .selection {
+.categorie-input .pink ~ .selection {
   background-color: var(--color-pink);
 }
-.radio-input .blue ~ .selection {
+.categorie-input .blue ~ .selection {
   background-color: rgb(11 117 223);
 }
-.radio-input .white ~ .selection {
+.categorie-input .white ~ .selection {
   background-color: white;
 }
-.radio-input .white {
+.categorie-input .white {
   color: black;
 }
