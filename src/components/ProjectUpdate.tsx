@@ -13,6 +13,11 @@ const ProjectUpdate = ({ project }: Props) => {
       >
         Reset
       </button>
+      <button
+        onClick={async () => await apiClient.delete(`/project/${project._id}`)}
+      >
+        Delete
+      </button>
     </div>
   );
 };
