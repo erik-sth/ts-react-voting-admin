@@ -2,7 +2,9 @@
   max-width: 500px;
 }
 .voted-c {
-  margin: 25vh 10vw;
+  margin: 25vh auto;
+  max-width: 60%;
+  min-width: fit-content;
   padding: 30px 50px;
   border-radius: 10px;
   font-size: medium;
