@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ServerExpectContestant } from "../hooks/useContestantAdmin";
 import { Project } from "../hooks/useProjects";
-import SelectCategorie from "./Voting/SelectCategorie";
 
 interface Props {
   create: (contestant: ServerExpectContestant) => void;
@@ -9,19 +8,28 @@ interface Props {
 }
 
 const ContestantForm = ({ create, project }: Props) => {
-  const [name, setName] = useState("");
+  const [newContestant, setNewContestant] = useState<ServerExpectContestant>({
+    name: "",
+    categories: [],
+  });
+
+  // Fix the typo in function name
+  const setDefaultValueForNewContestant = useCallback(() => {
+    setNewContestant({
+      name: "",
+      categories: project?.categories?.map((c) => c.option1.key) || [],
+    });
+  }, [project?.categories]);
+
+  // Call the useCallback function as a dependency in useEffect
+  useEffect(() => {
+    setDefaultValueForNewContestant();
+  }, [setDefaultValueForNewContestant]);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Create contestant object
-    const newContestant: ServerExpectContestant = {
-      name: name,
-      categories: [],
-    };
-    // Call create function with the contestant object
     create(newContestant);
-    // Clear form fields
-    setName("");
+    setDefaultValueForNewContestant();
   };
 
   return (
@@ -33,31 +41,46 @@ const ContestantForm = ({ create, project }: Props) => {
           <input
             type="text"
             id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={newContestant.name}
+            onChange={(e) =>
+              setNewContestant({
+                ...newContestant,
+                name: e.target.value,
+              })
+            }
             required
           />
         </div>
         <div>
           {project?.categories &&
-            project?.categories.map((c, i) => (
-              <SelectCategorie
-                key={i}
-                setCategorie={() => console.log("not implemented")}
-                selectedCategories={[]}
-                categories={[
-                  {
-                    key: c.option1.key,
-                    title: c.option1.name,
-                    color: c.option1.color,
-                  },
-                  {
-                    key: c.option2.key,
-                    title: c.option2.name,
-                    color: c.option2.color,
-                  },
-                ]}
-              />
+            project.categories.map((categories) => (
+              <div key={categories.title}>
+                <label htmlFor={categories.title}>{categories.title}</label>
+                <select
+                  onChange={(e) => {
+                    function filterOut() {
+                      return newContestant.categories.filter(
+                        (contestantCategories) =>
+                          contestantCategories !== categories.option1.key &&
+                          contestantCategories !== categories.option2.key
+                      );
+                    }
+                    setNewContestant({
+                      ...newContestant,
+                      categories: [...filterOut(), e.target.value],
+                    });
+                  }}
+                  name={categories.title}
+                  id={categories.title}
+                >
+                  <option value={categories.option1.key}>
+                    {categories.option1.name}
+                  </option>
+                  <option value={categories.option2.key}>
+                    {categories.option2.name}
+                  </option>
+                </select>
+              </div>
             ))}
         </div>
         <button type="submit">Submit</button>

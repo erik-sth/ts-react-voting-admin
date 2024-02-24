@@ -3,11 +3,7 @@ export interface Project {
   _id: string;
   name: string;
   owner: string;
-  categories: {
-    option1: CatergorieOption;
-    option2: CatergorieOption;
-    title: string;
-  }[];
+  categories: Categories[];
   config: {
     useTime: boolean;
     votingStartDayAndTime: Date;
@@ -16,11 +12,18 @@ export interface Project {
     limitVotesToOnePerIp: boolean;
   };
 }
+
+export interface Categories {
+  option1: CatergorieOption;
+  option2: CatergorieOption;
+  title: string;
+}
 export interface CatergorieOption {
   key: string;
   name: string;
-  color: "pink" | "blue" | "white";
+  color: colorSelection;
 }
+export type colorSelection = "blue" | "pink" | "white";
 
 export type ServerExpectedProjectData = Pick<
   Project,

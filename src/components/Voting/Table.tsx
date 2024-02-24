@@ -1,10 +1,12 @@
 import { ReactElement } from "react";
 import "./Table.css";
+
 export interface ColumnProps<T> {
   key: string;
   title: string | ReactElement;
-  render?: (column: ColumnProps<T>, item: T) => ReactElement;
+  render?: (column: ColumnProps<T>, item: T, index: number) => ReactElement;
 }
+
 type Props<T> = {
   columns: Array<ColumnProps<T>>;
   data?: T[];
@@ -26,15 +28,15 @@ const Table = <T,>({ data, columns }: Props<T>) => {
       </td>
     </tr>
   ) : (
-    data?.map((row, index) => {
+    data?.map((row, rowIndex) => {
       return (
-        <tr key={`row-${index}`}>
-          {columns.map((column, index2) => {
+        <tr key={`row-${rowIndex}`}>
+          {columns.map((column, colIndex) => {
             const value = column.render
-              ? column.render(column, row as T)
+              ? column.render(column, row as T, rowIndex)
               : (row[column.key as keyof typeof row] as string);
 
-            return <td key={`cell-${index2}`}>{value}</td>;
+            return <td key={`cell-${colIndex}`}>{value}</td>;
           })}
         </tr>
       );

@@ -7,12 +7,11 @@ import useContestantAdmin, {
   AdminContestant,
 } from "../hooks/useContestantAdmin";
 import useProjects from "../hooks/useProjects";
-import ProjectForm from "./../components/ProjectForm";
 import { useParams } from "react-router-dom";
 
 const dataVotes: ColumnProps<Vote>[] = [
   { title: "_id", key: "contestandId" },
-  { title: "Gender", key: "gender" },
+  { title: "Categories", key: "categories" },
   { title: "Ip", key: "publicIpAddress" },
 ];
 const dataContestant: ColumnProps<AdminContestant>[] = [
@@ -20,7 +19,7 @@ const dataContestant: ColumnProps<AdminContestant>[] = [
     title: "Name",
     key: "name",
   },
-  { title: "Gender", key: "gender" },
+  { title: "Categories", key: "categories" },
   { title: "Votes", key: "countedVotes" },
 ];
 const ProjectOverview = () => {
@@ -31,7 +30,7 @@ const ProjectOverview = () => {
   const { createContestant, renderData: renderContestant } =
     useContestantAdmin();
   const { projectId } = useParams();
-  const { data: projectData, create } = useProjects("/" + projectId);
+  const { data: projectData } = useProjects("/" + projectId);
   return (
     <div>
       <h1
@@ -56,7 +55,6 @@ const ProjectOverview = () => {
         <section>
           <ContestantForm create={createContestant} project={projectData[0]} />
           <h2>Setting</h2>
-          <ProjectForm create={create} />
         </section>
       </div>
     </div>
