@@ -3,7 +3,7 @@ import {
   ServerExpectedProjectData,
   colorSelection,
 } from "../../hooks/useProjects";
-import Table, { ColumnProps } from "../Voting/Table";
+import Table, { ColumnProps } from "../Table";
 
 interface Props {
   newProject: ServerExpectedProjectData;
