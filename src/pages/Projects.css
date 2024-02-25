@@ -9,6 +9,7 @@ section {
   border: 1px solid grey;
   border-radius: 10px;
   height: 80vh;
+  overflow-y: auto;
 }
 li {
   list-style-type: none;

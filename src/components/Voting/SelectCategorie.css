@@ -6,8 +6,8 @@
   display: flex;
   align-items: center;
   border-radius: 10px;
-  background-color: var(--color-btn-bg-pri);
-  color: var(--color-font);
+  background-color: var(--prim);
+  color: var(--text);
   width: var(--container_width);
   overflow: hidden;
   border: none;
@@ -36,7 +36,6 @@
 }
 
 .categorie-input .selectCategorie ~ .selection {
-  background-color: rgb(11 117 223);
   display: inline-block;
 }
 
@@ -49,7 +48,7 @@
 }
 
 .categorie-input .pink ~ .selection {
-  background-color: var(--color-pink);
+  background-color: var(--pink);
 }
 .categorie-input .blue ~ .selection {
   background-color: rgb(11 117 223);

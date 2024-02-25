@@ -24,7 +24,7 @@ footer {
 footer > div > button {
   width: 90vw;
   max-width: 500px;
-  background-color: var(--color-select);
+  background-color: var(--select);
 }
 .container {
   max-width: 500px;

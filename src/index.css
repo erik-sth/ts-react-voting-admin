@@ -1,12 +1,21 @@
-/* Global Variables */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 700;
+  color: var(--text);
+}
+
 :root {
-  --color-bg: #242424;
-  --color-btn-bg-pri: #1a1a1a;
-  --color-btn-bg-sec: rgb(5, 88, 197);
-  --color-font: #ffffff;
-  --color-border: grey;
-  --color-select: rgb(57, 165, 72);
-  --color-pink: #ad108b;
+  --text: #e1e1e1;
+  --background: #161616;
+  --primary: #2f27ce;
+  --secondary: #64636c;
+  --accent: #bb86fc;
+  --border: grey;
+  --select: rgb(57, 165, 72);
+  --pink: #ad108b;
   --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --line-height: 1.5;
   --font-weight: 400;
@@ -25,7 +34,7 @@
   font-weight: var(--font-weight);
   max-width: var(--max-width);
   color-scheme: var(--color-scheme);
-  background-color: var(--color-bg);
+  background-color: var(--background);
 }
 
 /* Heading Styles */
@@ -41,10 +50,38 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--color-btn-bg-pri);
-  color: var(--color-font);
+  background-color: var(--primary);
   transition: border-color 0.25s;
   max-height: 50px;
+}
+
+button:hover {
+  background-color: #1e17a7;
+}
+.sec {
+  background-color: var(--secondary);
+}
+.sec:hover {
+  background-color: #535257;
+}
+.neutral {
+  background-color: transparent;
+  border: 1px solid #474747;
+}
+.neutral:hover {
+  background-color: #58585852;
+}
+
+.delete {
+  background-color: rgb(180, 8, 8);
+}
+.delete:hover {
+  background-color: rgb(109, 0, 0);
+}
+
+button:disabled {
+  background-color: #000000;
+  cursor: not-allowed;
 }
 
 .heading-bar {
