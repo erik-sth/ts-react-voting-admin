@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import useProjects, { Project } from "../hooks/useProjects";
 import "./Projects.css";
 import ProjectForm from "./../components/ProjectForm";
-import Table, { ColumnProps } from "../components/Voting/Table";
+import Table, { ColumnProps } from "../components/Table";
 import { isBetween } from "../utils/time";
 
 const tableData: ColumnProps<Project>[] = [
@@ -22,7 +22,7 @@ const tableData: ColumnProps<Project>[] = [
         item.config;
 
       if (useTime) {
-        const isVotingOpen = isBetween(
+        const isVotingOpenByTime = isBetween(
           new Date(votingStartDayAndTime),
           new Date(votingEndDayAndTime),
           new Date()
@@ -30,7 +30,7 @@ const tableData: ColumnProps<Project>[] = [
 
         return (
           <div>
-            {isVotingOpen ? (
+            {isVotingOpenByTime ? (
               <span className="open">Voting is open by Time</span>
             ) : (
               <span className="closed">Voting is closed by Time</span>
@@ -38,7 +38,11 @@ const tableData: ColumnProps<Project>[] = [
           </div>
         );
       } else {
-        return <div className="open">Allways open</div>;
+        return item.config.votingEnabled ? (
+          <div className="open">Voting is open by Admin</div>
+        ) : (
+          <div className="closed">Voting is closed by Admin</div>
+        );
       }
     },
   },
@@ -53,8 +57,11 @@ const Projects = () => {
       <h1>Projects</h1>
       <div className="split">
         <section>
-{data.length === 0 ?  <h1>No projects available!</h1> :
-          <Table data={data} columns={tableData} />}
+          {data.length === 0 ? (
+            <h1>No projects available!</h1>
+          ) : (
+            <Table data={data} columns={tableData} />
+          )}
         </section>
         <section>
           <ProjectForm create={create} />
