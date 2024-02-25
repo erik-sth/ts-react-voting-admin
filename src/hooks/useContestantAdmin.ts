@@ -33,10 +33,14 @@ const useContestantAdmin = () => {
   function createContestant(contestant: ServerExpectContestant) {
     apiClient.post(`/contestant/${projectId}`, contestant);
   }
+  function deleteContestant(contestantId: string) {
+    apiClient.delete(`/contestant/${projectId}/${contestantId}`);
+  }
 
   return {
     renderData,
     createContestant,
+    deleteContestant,
   };
 };
 
