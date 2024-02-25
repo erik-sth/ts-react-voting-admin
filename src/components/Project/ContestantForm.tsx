@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { ServerExpectContestant } from "../hooks/useContestantAdmin";
-import { Project } from "../hooks/useProjects";
+import { ServerExpectContestant } from "../../hooks/useContestantAdmin";
+import { Project } from "../../hooks/useProjects";
 
 interface Props {
   create: (contestant: ServerExpectContestant) => void;

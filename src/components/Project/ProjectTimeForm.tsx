@@ -1,8 +1,8 @@
-import { ServerExpectedProjectData } from "../../hooks/useProjects";
+import { Project } from "../../hooks/useProjects";
 
 interface Props {
-  newProject: ServerExpectedProjectData;
-  updateProject: (project: ServerExpectedProjectData) => void;
+  newProject: Project;
+  updateProject: (project: Project) => void;
 }
 const ProjectTimeForm = ({ newProject, updateProject }: Props) => {
   const handleStartTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {

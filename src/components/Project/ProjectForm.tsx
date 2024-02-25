@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { ServerExpectedProjectData } from "../hooks/useProjects";
-import ProjectTimeForm from "./Project/ProjectTimeForm";
-import CategoriesForm from "./Project/CategoriesForm";
+import { Project, ServerExpectedProjectData } from "../../hooks/useProjects";
+import ProjectTimeForm from "./ProjectTimeForm";
+import CategoriesForm from "./CategoriesForm";
 
 interface Props {
   create: (project: ServerExpectedProjectData) => void;
@@ -65,7 +65,7 @@ const ProjectForm: React.FC<Props> = ({ create }: Props) => {
         </div>
 
         <ProjectTimeForm
-          newProject={newProject}
+          newProject={newProject as Project}
           updateProject={setNewProject}
         />
         <button type="submit">Create Project</button>
