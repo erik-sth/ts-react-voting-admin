@@ -8,6 +8,8 @@ import useProjectOverviewHook, {
 } from "../hooks/useProjectOverviewHook";
 import { useParams } from "react-router-dom";
 import ProjectSettings from "../components/Project/ProjectSettings";
+import extLinkSvg from "../assets/ext-link.svg";
+import "./ProjectOverview.css";
 
 const dataVotes: ColumnProps<Vote>[] = [
   { title: "contestantId", key: "contestandId" },
@@ -71,9 +73,12 @@ const ProjectOverview = () => {
           <span className="open">Connected</span>
         ) : (
           <span className="closed">Not connected</span>
-        )}
+        )}{" "}
+        <a className="extLinkBtn" href={`/${projectId}`}>
+          <img src={extLinkSvg} className="extLink" alt="" />
+        </a>
       </h1>
-      <a href={`/${projectId}`}>Vote</a>
+
       <div className="split">
         <section>
           {selectedCategorie === "contestants" && (

@@ -1,0 +1,8 @@
+.extLink {
+  width: 30px;
+}
+
+.extLink:hover {
+  transform: rotate(15deg);
+  transition: all 0.2s;
+}
