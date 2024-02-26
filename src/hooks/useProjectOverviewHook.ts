@@ -68,10 +68,18 @@ const useProjectOverviewHook = () => {
   }, [projectId, contestants, votes]);
 
   function createContestant(contestant: ServerExpectContestant) {
-    apiClient.post(`/contestant/${projectId}`, contestant);
+    const prevContestants = [...contestants];
+    setContestants([...contestants, contestant as AdminContestant]);
+    apiClient
+      .post(`/contestant/${projectId}`, contestant)
+      .catch(() => setContestants(prevContestants));
   }
   function deleteContestant(contestantId: string) {
-    apiClient.delete(`/contestant/${projectId}/${contestantId}`);
+    const prevContestants = [...contestants];
+    setContestants([...contestants.filter((c) => c._id !== contestantId)]);
+    apiClient
+      .delete(`/contestant/${projectId}/${contestantId}`)
+      .catch(() => setContestants(prevContestants));
   }
 
   const retryConnection = () => {
