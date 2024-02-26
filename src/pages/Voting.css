@@ -26,6 +26,9 @@ footer > div > button {
   max-width: 500px;
   background-color: var(--select);
 }
+footer > div > button:hover {
+  background-color: var(--select-hover);
+}
 .container {
   max-width: 500px;
   margin: 0 auto;
