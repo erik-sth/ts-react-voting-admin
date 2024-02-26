@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ServerExpectContestant } from "../../hooks/useContestantAdmin";
+import { ServerExpectContestant } from "../../hooks/useProjectOverviewHook";
 import { Project } from "../../hooks/useProjects";
 
 interface Props {

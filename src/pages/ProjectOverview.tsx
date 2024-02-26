@@ -1,17 +1,16 @@
 import { useState } from "react";
 import Table, { ColumnProps } from "../components/Table";
-import useVotes, { Vote } from "../hooks/useVotes";
+import { Vote } from "../hooks/useVotes";
 import "./Projects";
 import ContestantForm from "../components/Project/ContestantForm";
-import useContestantAdmin, {
+import useProjectOverviewHook, {
   AdminContestant,
-} from "../hooks/useContestantAdmin";
-import useProjects from "../hooks/useProjects";
+} from "../hooks/useProjectOverviewHook";
 import { useParams } from "react-router-dom";
 import ProjectSettings from "../components/Project/ProjectSettings";
 
 const dataVotes: ColumnProps<Vote>[] = [
-  { title: "_id", key: "contestandId" },
+  { title: "contestantId", key: "contestandId" },
   { title: "Categories", key: "categories" },
   { title: "Ip", key: "publicIpAddress" },
 ];
@@ -20,12 +19,16 @@ const ProjectOverview = () => {
   const [selectedCategorie, setSelectedCategorie] = useState<
     "votes" | "contestants"
   >("contestants");
-  const { renderData: renderVotes } = useVotes();
   const {
     createContestant,
-    renderData: renderContestant,
+    contestants,
     deleteContestant,
-  } = useContestantAdmin();
+    project,
+    votes,
+    error,
+    loading,
+    connected,
+  } = useProjectOverviewHook();
   const { projectId } = useParams();
   const dataContestant: ColumnProps<AdminContestant>[] = [
     {
@@ -46,16 +49,13 @@ const ProjectOverview = () => {
       },
     },
   ];
-  const { data: projectData } = useProjects("/" + projectId);
-  function getProject() {
-    const project = { ...projectData[0] };
-    project.config.votingStartDayAndTime = new Date(
-      project.config.votingStartDayAndTime
-    );
-    project.config.votingEndDayAndTime = new Date(
-      project.config.votingEndDayAndTime
-    );
-    return project;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
   return (
     <div>
@@ -66,25 +66,30 @@ const ProjectOverview = () => {
           )
         }
       >
-        {projectData && projectData[0]?.name}
+        {project?.name}:{" "}
+        {connected ? (
+          <span className="open">Connected</span>
+        ) : (
+          <span className="closed">Not connected</span>
+        )}
       </h1>
       <a href={`/${projectId}`}>Vote</a>
       <div className="split">
         <section>
           {selectedCategorie === "contestants" && (
-            <Table data={renderContestant} columns={dataContestant} />
+            <Table data={contestants} columns={dataContestant} />
           )}
           {selectedCategorie === "votes" && (
-            <Table data={renderVotes} columns={dataVotes} />
+            <Table data={votes} columns={dataVotes} />
           )}
         </section>
-        {projectData && projectData[0] && (
+        {project && (
           <section>
-            <ContestantForm create={createContestant} project={getProject()} />
+            <ContestantForm create={createContestant} project={project} />
             <h2>Setting</h2>
             <ProjectSettings
               updateProject={() => console.log("project update")}
-              project={getProject()}
+              project={project}
             />
           </section>
         )}

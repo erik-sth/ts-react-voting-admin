@@ -12,7 +12,16 @@ interface Props {
 const ProjectSettings = ({ project, updateProject }: Props) => {
   const navigate = useNavigate();
   const [votingOpen, setVotingOpen] = useState(project?.config?.votingEnabled);
-
+  function getProject() {
+    project.config.votingStartDayAndTime = new Date(
+      project.config.votingStartDayAndTime
+    );
+    project.config.votingEndDayAndTime = new Date(
+      project.config.votingEndDayAndTime
+    );
+    return project;
+  }
+  project = getProject();
   return (
     <div>
       <div>
