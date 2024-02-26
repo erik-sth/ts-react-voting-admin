@@ -53,6 +53,7 @@ button {
   background-color: var(--primary);
   transition: border-color 0.25s;
   max-height: 50px;
+  color: var(--text);
 }
 
 button:hover {
