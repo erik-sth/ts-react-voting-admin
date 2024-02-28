@@ -6,3 +6,9 @@
   transform: rotate(15deg);
   transition: all 0.2s;
 }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 90vw;
+}
