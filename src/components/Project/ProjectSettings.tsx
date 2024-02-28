@@ -24,11 +24,15 @@ const ProjectSettings = ({ project }: Props) => {
       <div>
         <ProjectTimeForm
           newProject={project}
-          updateProject={(project) => {
-            if (project.config.useTime) {
-              apiClient.put(`/project/useTime/${project._id}`);
+          updateProject={(newProject) => {
+            if (newProject.config.useTime != project.config.useTime) {
+              if (newProject.config.useTime) {
+                apiClient.put(`/project/useTime/${project._id}`);
+              } else {
+                apiClient.put(`/project/admin/${project._id}`);
+              }
             } else {
-              apiClient.put(`/project/admin/${project._id}`);
+              apiClient.put(`/project/time/${project._id}`, newProject);
             }
           }}
         />
