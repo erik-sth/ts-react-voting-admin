@@ -17,36 +17,31 @@ const Voting = () => {
     currentVoted,
   } = useVoting();
 
-  const handleReset = () => {
-    localStorage.clear();
-  };
-
   return (
     <>
-      <button onClick={handleReset}>Reset</button>
       <nav className="container">
         <h1>Ballkönig/-in</h1>
+        {categories &&
+          categories.map((c, i) => (
+            <SelectCategorie
+              key={i}
+              setCategorie={setSelectedCategories}
+              selectedCategories={selectedCategories}
+              categories={[
+                {
+                  key: c.option1.key,
+                  title: c.option1.name,
+                  color: c.option1.color,
+                },
+                {
+                  key: c.option2.key,
+                  title: c.option2.name,
+                  color: c.option2.color,
+                },
+              ]}
+            />
+          ))}
       </nav>
-      {categories &&
-        categories.map((c, i) => (
-          <SelectCategorie
-            key={i}
-            setCategorie={setSelectedCategories}
-            selectedCategories={selectedCategories}
-            categories={[
-              {
-                key: c.option1.key,
-                title: c.option1.name,
-                color: c.option1.color,
-              },
-              {
-                key: c.option2.key,
-                title: c.option2.name,
-                color: c.option2.color,
-              },
-            ]}
-          />
-        ))}
       {display === "voting" && (
         <section className="container">
           <SelectContestant

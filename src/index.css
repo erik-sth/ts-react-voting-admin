@@ -36,6 +36,7 @@ h5 {
 }
 /* Global Styles */
 :root {
+  height: 100vh;
   font-family: var(--font-family);
   line-height: var(--line-height);
   font-weight: var(--font-weight);
