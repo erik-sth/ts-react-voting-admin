@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Project } from "../../hooks/useProjects";
 import apiClient from "../../services/api-client";
@@ -6,12 +5,10 @@ import ProjectTimeForm from "./ProjectTimeForm";
 
 interface Props {
   project: Project;
-  updateProject: (project: Project) => void;
 }
 
-const ProjectSettings = ({ project, updateProject }: Props) => {
+const ProjectSettings = ({ project }: Props) => {
   const navigate = useNavigate();
-  const [votingOpen, setVotingOpen] = useState(project?.config?.votingEnabled);
   function getProject() {
     project.config.votingStartDayAndTime = new Date(
       project.config.votingStartDayAndTime
@@ -25,22 +22,30 @@ const ProjectSettings = ({ project, updateProject }: Props) => {
   return (
     <div>
       <div>
-        <ProjectTimeForm newProject={project} updateProject={updateProject} />
-
+        <ProjectTimeForm
+          newProject={project}
+          updateProject={(project) => {
+            if (project.config.useTime) {
+              apiClient.put(`/project/useTime/${project._id}`);
+            } else {
+              apiClient.put(`/project/admin/${project._id}`);
+            }
+          }}
+        />
         <button
           disabled={project.config.useTime}
-          className={votingOpen ? "open neutral" : "closed neutral"}
+          className={
+            project.config.votingEnabled ? "open neutral" : "closed neutral"
+          }
           onClick={() => {
-            if (votingOpen) {
+            if (project.config.votingEnabled) {
               apiClient.put(`/project/lock/${project._id}`);
-              setVotingOpen(false);
             } else {
               apiClient.put(`/project/unlock/${project._id}`);
-              setVotingOpen(true);
             }
           }}
         >
-          {votingOpen ? "Lock voting" : "Unlock voting"}
+          {project.config.votingEnabled ? "Lock voting" : "Unlock voting"}
         </button>
       </div>
       <div>

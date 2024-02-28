@@ -10,9 +10,11 @@ export interface AdminContestant {
   _id: string;
   name: string;
   categories: string[];
-  countedVotes: number;
+  voteCount: number;
+  duplicateVoteCount: number;
   projectId: string;
 }
+
 export type ServerExpectContestant = Pick<
   AdminContestant,
   "categories" | "name"
@@ -51,21 +53,28 @@ const useProjectOverviewHook = () => {
 
   useEffect(() => {
     const handleVote = (data: { contestant: AdminContestant; vote: Vote }) => {
-      const filterContestant: AdminContestant[] = contestants.filter(
-        (c) => c._id !== data.contestant._id
+      const indexToUpdate = contestants.findIndex(
+        (c) => c._id === data.contestant._id
       );
-      setContestants([...filterContestant, data.contestant]);
+
+      const updatedContestants = [...contestants];
+
+      updatedContestants[indexToUpdate] = data.contestant;
+
+      setContestants(updatedContestants);
       setVotes([...votes, data.vote]);
     };
-
+    const handleProject = (data: Project) => {
+      setProject(data);
+    };
     socket.emit("join", { projectId });
     socket.on("vote", handleVote);
+    socket.on("project", handleProject);
 
     return () => {
-      // Clean up the specific event listener
       socket.off("vote", handleVote);
     };
-  }, [projectId, contestants, votes]);
+  }, [projectId, contestants, votes, project]);
 
   function createContestant(contestant: ServerExpectContestant) {
     const prevContestants = [...contestants];
