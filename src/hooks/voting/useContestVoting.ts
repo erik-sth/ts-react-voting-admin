@@ -95,7 +95,7 @@ const useContestVoting = (
           selectedCategories
         );
 
-        //saveStoredContestantWhenVoted(currentSelected);
+        saveStoredContestantWhenVoted(currentSelected);
       })
       .catch((err: AxiosError) => {
         if (err.response?.status === 403) {
