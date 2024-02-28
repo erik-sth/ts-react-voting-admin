@@ -7,8 +7,8 @@ export interface Vote {
   contestandId: string;
   projectId: string;
   publicIpAddress: string;
-  remotePort: string;
-  gender: "m" | "F";
+  categories: string[];
+  duplicateVote: boolean;
 }
 
 const useVotes = () => {

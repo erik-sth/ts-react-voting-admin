@@ -50,7 +50,13 @@ const useContestVoting = (
 
     if (voted) {
       setCurrentVoted(voted?.contestant);
-      setDisplay("voted");
+      if (display === "banned") {
+        setTimeout(() => {
+          setDisplay("voted");
+        }, 1000);
+      } else {
+        setDisplay("voted");
+      }
       return;
     }
 
@@ -71,10 +77,11 @@ const useContestVoting = (
 
     setDisplay("voting");
   }, [
-    manageLocalStorage,
     contestants,
-    selectedCategories,
+    display,
+    manageLocalStorage,
     saveStoredContestantWhenVoted,
+    selectedCategories,
     storeVotedPerCategory,
   ]);
   function vote() {
@@ -91,7 +98,15 @@ const useContestVoting = (
         saveStoredContestantWhenVoted(currentSelected);
       })
       .catch((err: AxiosError) => {
-        if (err.response?.status === 403) setDisplay("banned");
+        if (err.response?.status === 403) {
+          manageLocalStorage.setVoted(
+            currentSelected?.name || "",
+            selectedCategories
+          );
+
+          saveStoredContestantWhenVoted(currentSelected);
+          setDisplay("banned");
+        }
       });
   }
 
