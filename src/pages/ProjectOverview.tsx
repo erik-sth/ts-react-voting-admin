@@ -90,8 +90,7 @@ const ProjectOverview = () => {
             )
           }
           value={selectedCategorie}
-          name=""
-          id=""
+          className="select"
         >
           <option value="votes">votes</option>
           <option value="contestants">contestant</option>
