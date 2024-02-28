@@ -27,9 +27,9 @@ const useContestVoting = (
     { categories: string[]; contestant: Contestant }[]
   >([]);
   const [currentVoted, setCurrentVoted] = useState<Contestant>();
-  const [display, setDisplay] = useState<"voting" | "banned" | "voted">(
-    "voting"
-  );
+  const [display, setDisplay] = useState<
+    "voting" | "banned" | "voted" | "spam"
+  >("voting");
   const saveStoredContestantWhenVoted = useCallback(
     (contestantStored: Contestant) => {
       setStoreVotedPerCategorie((prevStore) => [
@@ -62,7 +62,7 @@ const useContestVoting = (
 
     // If not stored then check local storage
     const name = manageLocalStorage.getVoted(selectedCategories);
-
+    if (display == "spam") return;
     if (!name) {
       setCurrentVoted(undefined);
       setDisplay("voting"); // Ensure to set display to "voting" here
@@ -106,6 +106,8 @@ const useContestVoting = (
 
           saveStoredContestantWhenVoted(currentSelected);
           setDisplay("banned");
+        } else if (err.response?.status === 429) {
+          setDisplay("spam");
         }
       });
   }
@@ -113,6 +115,7 @@ const useContestVoting = (
   return {
     vote,
     display,
+    setDisplay,
     currentVoted,
   };
 };

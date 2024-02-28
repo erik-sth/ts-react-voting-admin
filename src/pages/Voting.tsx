@@ -3,6 +3,7 @@ import Voted from "../components/Voting/Voted";
 import SelectContestant from "../components/Voting/SelectContestant";
 import useVoting from "../hooks/voting/VotingPageManager";
 import "./Voting.css";
+import SpammingDetected from "../components/Voting/SpammingDetected";
 
 const Voting = () => {
   const {
@@ -54,6 +55,7 @@ const Voting = () => {
       {display === "voted" && currentVoted && (
         <Voted name={currentVoted?.name} />
       )}
+      {display === "spam" && <SpammingDetected />}
       {display === "banned" && (
         <div className="voted-c">Already voted from this device.</div>
       )}

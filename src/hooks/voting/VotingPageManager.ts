@@ -30,7 +30,7 @@ const useVoting = () => {
     changeSelectedContestantPerCategorie,
   } = useContestant(selectedCategories);
 
-  const { currentVoted, display, vote } = useContestVoting(
+  const { currentVoted, display, setDisplay, vote } = useContestVoting(
     selectedCategories,
     contestants,
     currentSelected
@@ -46,10 +46,13 @@ const useVoting = () => {
           setCategories(response.data.project.categories);
         })
         .catch((error) => {
+          if (error.response?.status === 429) {
+            setDisplay("spam");
+          }
           console.error("Error fetching contestants and project:", error);
         });
     }
-  }, [projectId, setCategories, setContestant]);
+  }, [projectId, setCategories, setContestant, setDisplay]);
 
   return {
     renderData,
