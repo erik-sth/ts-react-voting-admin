@@ -1,0 +1,39 @@
+li {
+  display: flex;
+  justify-content: start;
+  max-width: 80vw;
+  width: 100%;
+}
+.name {
+  width: 20vw;
+  max-width: 20vw;
+}
+
+/*bars*/
+.bars {
+  min-width: 35vw;
+  display: flex;
+  justify-content: start;
+  margin: 10px;
+}
+
+.bar {
+  min-height: 40px;
+  display: flex;
+  justify-content: start;
+}
+.percentage {
+  width: 100%;
+  padding: 8px;
+}
+
+/* colors*/
+.blue {
+  background-color: rgb(28, 18, 114);
+}
+.red {
+  background-color: rgb(180, 10, 10);
+}
+.score {
+  padding: 10px;
+}
