@@ -2,12 +2,12 @@ import { useState } from "react";
 import Table, { ColumnProps } from "../components/Table";
 import { Vote } from "../hooks/useVotes";
 import "./Projects";
-import ContestantForm from "../components/Project/ContestantForm";
+import ContestantForm from "../components/Forms/ContestantForm";
 import useProjectOverviewHook, {
   AdminContestant,
 } from "../hooks/useProjectOverviewHook";
 import { useParams } from "react-router-dom";
-import ProjectSettings from "../components/Project/ProjectSettings";
+import ProjectSettings from "../components/Forms/ProjectSettings";
 import extLinkSvg from "../assets/ext-link.svg";
 import "./ProjectOverview.css";
 import Stats from "./Stats";

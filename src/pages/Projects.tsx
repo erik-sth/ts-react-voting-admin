@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import useProjects, { Project } from "../hooks/useProjects";
 import "./Projects.css";
-import ProjectForm from "../components/Project/ProjectForm";
+import ProjectForm from "../components/Forms/ProjectForm";
 import Table, { ColumnProps } from "../components/Table";
 import { isBetween } from "../utils/time";
 
