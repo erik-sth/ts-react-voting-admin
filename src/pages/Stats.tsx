@@ -7,18 +7,18 @@ interface Props {
   displayDuplicateVotes: boolean;
 }
 const Stats = ({ contestants, displayDuplicateVotes }: Props) => {
-  let sorted = contestants.sort(
+  let sorted = contestants?.sort(
     (a, b) =>
       b.voteCount + b.duplicateVoteCount - (a.voteCount + a.duplicateVoteCount)
   );
-  if (!displayDuplicateVotes)
-    sorted = contestants.sort((a, b) => b.voteCount + -a.voteCount);
-  const maxScore = contestants[0].voteCount + contestants[0].duplicateVoteCount;
+  if (contestants && !displayDuplicateVotes)
+    sorted = contestants?.sort((a, b) => b.voteCount + -a.voteCount);
+  const maxScore = contestants[0]?.voteCount + contestants[0]?.duplicateVoteCount;
   const maxWidth = 80 / maxScore;
   return (
     <div>
       <ul>
-        {sorted.map((c) => (
+        {sorted?.map((c) => (
           <li key={c._id}>
             <div className="name">{c.name} :</div>
             <div className="bars">
