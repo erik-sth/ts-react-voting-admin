@@ -11,7 +11,7 @@ const Stats = ({ contestants, displayDuplicateVotes }: Props) => {
     (a, b) =>
       b.voteCount + b.duplicateVoteCount - (a.voteCount + a.duplicateVoteCount)
   );
-  if (contestants && !displayDuplicateVotes)
+  if ( !displayDuplicateVotes)
     sorted = contestants?.sort((a, b) => b.voteCount + -a.voteCount);
   const maxScore = contestants[0]?.voteCount + contestants[0]?.duplicateVoteCount;
   const maxWidth = 80 / maxScore;
@@ -37,14 +37,13 @@ const Stats = ({ contestants, displayDuplicateVotes }: Props) => {
             </div>
 
             <div className="score">
-              {displayDuplicateVotes ? c.duplicateVoteCount : 0 + c.voteCount}
+              {displayDuplicateVotes ? c.duplicateVoteCount + c.voteCount: c.voteCount}
             </div>
           </li>
         ))}{" "}
         <li key="scale" className="scale">
           <div className="name">Scale :</div>
           <div className="bars">
-            {" "}
             <Bar
               color="blue"
               maxPercentage={maxWidth}
