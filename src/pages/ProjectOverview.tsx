@@ -21,7 +21,7 @@ const dataVotes: ColumnProps<Vote>[] = [
 const ProjectOverview = () => {
   const [selectedCategorie, setSelectedCategorie] = useState<
     "votes" | "contestants" | "stats"
-  >("stats");
+  >("contestants");
   const {
     createContestant,
     contestants,
