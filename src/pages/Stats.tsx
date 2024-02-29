@@ -20,7 +20,7 @@ const Stats = ({ contestants, displayDuplicateVotes }: Props) => {
       <ul>
         {sorted?.map((c) => (
           <li key={c._id}>
-            <div className="name">{c.name} :</div>
+           <div className="name-container"> <div className="name">{c.name} :</div></div>
             <div className="bars">
               <Bar
                 color="blue"

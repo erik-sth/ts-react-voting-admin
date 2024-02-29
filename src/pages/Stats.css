@@ -4,9 +4,14 @@ li {
   max-width: 80vw;
   width: 100%;
 }
-.name {
+.name-container{
+  display: flex;
+  justify-content: end;
   width: 20vw;
   max-width: 20vw;
+}
+.name {
+  width: 100%;
 }
 
 /*bars*/
