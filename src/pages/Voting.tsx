@@ -1,9 +1,9 @@
-import SelectCategorie from "../Voting/SelectCategorie";
-import Voted from "../Voting/Voted";
-import SelectContestant from "../Voting/SelectContestant";
+import SelectCategorie from "../components/Voting/SelectCategorie";
+import Voted from "../voting/Voted";
+import SelectContestant from "../components/Voting/SelectContestant";
 import useVoting from "../hooks/voting/VotingPageManager";
 import "./Voting.css";
-import SpammingDetected from "../Voting/SpammingDetected";
+import SpammingDetected from "../voting/SpammingDetected";
 
 const Voting = () => {
   const {
