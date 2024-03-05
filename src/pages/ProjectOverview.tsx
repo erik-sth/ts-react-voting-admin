@@ -78,7 +78,7 @@ const ProjectOverview = () => {
           ) : (
             <span className="closed">Not connected</span>
           )}{" "}
-          <a className="extLinkBtn" href={`/${projectId}`}>
+          <a className="extLinkBtn" aria-label="Open voting page..." href={`/${projectId}`}>
             <img src={extLinkSvg} className="extLink" alt="" />
           </a>
         </h1>
