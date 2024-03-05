@@ -52,6 +52,7 @@ const useProjectOverviewHook = () => {
   }, [projectId]);
 
   useEffect(() => {
+    if (!projectId) return;
     const handleVote = (data: { contestant: AdminContestant; vote: Vote }) => {
       const indexToUpdate = contestants.findIndex(
         (c) => c._id === data.contestant._id
