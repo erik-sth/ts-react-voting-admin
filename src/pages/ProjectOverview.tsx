@@ -97,13 +97,13 @@ const ProjectOverview = () => {
           <option value="stats">stats</option>
         </select>
       </nav>
-      <label htmlFor="">Display double Votes</label>
+      <label htmlFor="doubleVotes">Display double Votes</label>
       <input
         checked={displayDuplicateVotes}
         onChange={() => setDisplayDuplicateVotes(!displayDuplicateVotes)}
         type="checkbox"
         name=""
-        id=""
+        id="doubleVotes"
       />
       <div className="split">
         <section>
