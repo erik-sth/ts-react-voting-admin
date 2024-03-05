@@ -51,7 +51,7 @@
   background-color: var(--pink);
 }
 .categorie-input .blue ~ .selection {
-  background-color: rgb(11 117 223);
+  background-color: #0441b3;
 }
 .categorie-input .white ~ .selection {
   background-color: white;
