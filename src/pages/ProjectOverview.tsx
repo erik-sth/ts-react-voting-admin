@@ -83,7 +83,7 @@ const ProjectOverview = () => {
           </a>
         </h1>
 <div>
-        <label htmlfor="pageSelect">Select page</label>
+        <label htmlFor="pageSelect">Select page</label>
         <select
           onChange={(e) =>
             setSelectedCategorie(
