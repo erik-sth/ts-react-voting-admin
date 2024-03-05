@@ -82,7 +82,8 @@ const ProjectOverview = () => {
             <img src={extLinkSvg} className="extLink" alt="" />
           </a>
         </h1>
-
+<div>
+        <label htmlfor="pageSelect">Select page</label>
         <select
           onChange={(e) =>
             setSelectedCategorie(
@@ -91,11 +92,12 @@ const ProjectOverview = () => {
           }
           value={selectedCategorie}
           className="select"
+          id="pageSelect"
         >
           <option value="votes">votes</option>
           <option value="contestants">contestant</option>
           <option value="stats">stats</option>
-        </select>
+        </select></div>
       </nav>
       <label htmlFor="doubleVotes">Display double Votes</label>
       <input
