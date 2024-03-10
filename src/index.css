@@ -29,9 +29,12 @@ h5 {
   --max-width: 500px;
   --color-scheme: dark;
 }
+body {
+  margin: 0;
+}
 #root {
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 1rem;
   text-align: center;
 }
 /* Global Styles */

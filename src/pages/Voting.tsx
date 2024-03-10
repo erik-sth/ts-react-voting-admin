@@ -4,6 +4,9 @@ import SelectContestant from "../components/Voting/SelectContestant";
 import useVoting from "../hooks/voting/VotingPageManager";
 import "./Voting.css";
 import SpammingDetected from "./voting/SpammingDetected";
+import SearchBox from "./../components/SearchBox";
+import { useCallback, useEffect, useState } from "react";
+import { Contestant } from "../hooks/useProject";
 
 const Voting = () => {
   const {
@@ -14,60 +17,81 @@ const Voting = () => {
     currentSelected,
     selectedCategories,
     changeSelectedContestantPerCategorie,
-    setSelectedCategories,
+    setNewCategorie,
     currentVoted,
   } = useVoting();
+  const [filteredContestant, setFilteredContestant] = useState<Contestant[]>(
+    []
+  );
 
+  const filterContestantsByName = useCallback(
+    (name: string) => {
+      if (name === "") return setFilteredContestant(renderData);
+      // Escape special characters in the entered name
+      const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+      // Construct the regular expression dynamically
+      const regexPattern: RegExp = new RegExp(`${escapedName}\\w*`, "gi");
+
+      // Use the constructed regular expression to filter contestants
+      const filteredContestants = renderData.filter((contestant) => {
+        return regexPattern.test(contestant.name);
+      });
+
+      setFilteredContestant(filteredContestants);
+    },
+    [renderData]
+  );
+
+  useEffect(() => {
+    filterContestantsByName("");
+  }, [filterContestantsByName, selectedCategories]);
   return (
-    <>
+    <div className="body container">
       <nav className="container">
         <h1>Ballkönig/-in</h1>
         {categories &&
           categories.map((c, i) => (
             <SelectCategorie
               key={i}
-              setCategorie={setSelectedCategories}
+              setCategorie={setNewCategorie}
               selectedCategories={selectedCategories}
-              categories={[
-                {
-                  key: c.option1.key,
-                  title: c.option1.name,
-                  color: c.option1.color,
-                },
-                {
-                  key: c.option2.key,
-                  title: c.option2.name,
-                  color: c.option2.color,
-                },
-              ]}
+              categorie={c}
             />
           ))}
       </nav>
-      {display === "voting" && (
-        <section className="container">
-          <SelectContestant
-            isSelected={(id) => currentSelected?._id === id}
-            renderData={renderData}
-            selectContestant={changeSelectedContestantPerCategorie}
-          />
-        </section>
+      {renderData.length > 25 && (
+        <SearchBox onSearch={filterContestantsByName} />
       )}
-      {display === "voted" && currentVoted && (
-        <Voted name={currentVoted?.name} />
-      )}
-      {display === "spam" && <SpammingDetected />}
-      {display === "banned" && (
-        <div className="voted-c">Already voted from this device.</div>
-      )}
+      <section className="main">
+        {display === "voting" && (
+          <section className="container">
+            <SelectContestant
+              isSelected={(id) => currentSelected?._id === id}
+              renderData={filteredContestant}
+              selectContestant={changeSelectedContestantPerCategorie}
+            />
+          </section>
+        )}
+        {display === "voted" && currentVoted && (
+          <Voted name={currentVoted?.name} />
+        )}
+        {display === "spam" && <SpammingDetected />}
+        {display === "banned" && (
+          <div className="voted-c">Already voted from this device.</div>
+        )}
+      </section>
       <footer className="container">
         {currentSelected && display === "voting" && !currentVoted && (
           <div>
             <p>Änderung der Wahl nicht möglich.</p>
-            <button onClick={vote}>Final Abstimmen</button>
+            <button className="vote-btn" onClick={vote}>
+              Final Abstimmen
+            </button>
           </div>
         )}
       </footer>
-    </>
+    </div>
   );
 };
 

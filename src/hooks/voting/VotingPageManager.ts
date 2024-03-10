@@ -14,12 +14,8 @@ export interface Contestant {
 const useVoting = () => {
   const { projectId } = useParams();
 
-  const {
-    categories,
-    setCategories,
-    selectedCategories,
-    setSelectedCategories,
-  } = CategoriesProvider();
+  const { categories, setCategories, selectedCategories, setNewCategorie } =
+    CategoriesProvider();
 
   const {
     renderData,
@@ -62,7 +58,7 @@ const useVoting = () => {
     selectedCategories,
     currentSelected,
     storeSelectedPerCategorie,
-    setSelectedCategories,
+    setNewCategorie,
     changeSelectedContestantPerCategorie,
     currentVoted,
   };
