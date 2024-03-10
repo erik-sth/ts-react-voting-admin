@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Table, { ColumnProps } from "../components/Table";
 import { Vote } from "../hooks/useVotes";
 import "./Projects";
@@ -6,12 +6,13 @@ import ContestantForm from "../components/Forms/ContestantForm";
 import useProjectOverviewHook, {
   AdminContestant,
 } from "../hooks/useProjectOverviewHook";
-import { useParams } from "react-router-dom";
 import ProjectSettings from "../components/Forms/ProjectSettings";
-import extLinkSvg from "../assets/ext-link.svg";
 import "./ProjectOverview.css";
 import Stats from "./Stats";
-
+import ProjectNav from "../components/Project/ProjectNav";
+import { Project } from "../hooks/useProjects";
+import CategoriesProvider from "../hooks/voting/CategoriesProvider";
+import { hasAllValues } from "../utils/array";
 const dataVotes: ColumnProps<Vote>[] = [
   { title: "contestantId", key: "contestandId" },
   { title: "Categories", key: "categories" },
@@ -32,7 +33,6 @@ const ProjectOverview = () => {
     loading,
     connected,
   } = useProjectOverviewHook();
-  const { projectId } = useParams();
   const dataContestant: ColumnProps<AdminContestant>[] = [
     {
       title: "Name",
@@ -54,6 +54,13 @@ const ProjectOverview = () => {
     },
   ];
 
+  const { categories, selectedCategories, setNewCategorie, setCategories } =
+    CategoriesProvider(false);
+
+  useEffect(() => {
+    if (!project) return;
+    setCategories(project?.categories);
+  }, [project, setCategories]);
   const [displayDuplicateVotes, setDisplayDuplicateVotes] =
     useState<boolean>(true);
 
@@ -68,49 +75,55 @@ const ProjectOverview = () => {
   const filteredVotes = displayDuplicateVotes
     ? votes
     : votes.filter((v) => !v.duplicateVote);
+
+  const filterContestant = contestants.filter((c) =>
+    hasAllValues(c.categories, selectedCategories)
+  );
+
   return (
     <div>
-      <nav>
-        <h1>
-          {project?.name}:{" "}
-          {connected ? (
-            <span className="open">Connected</span>
-          ) : (
-            <span className="closed">Not connected</span>
-          )}{" "}
-          <a className="extLinkBtn" aria-label="Open voting page..." href={`/${projectId}`}>
-            <img src={extLinkSvg} className="extLink" alt="" />
-          </a>
-        </h1>
-<div>
-        <label htmlFor="pageSelect">Select page</label>
-        <select
-          onChange={(e) =>
-            setSelectedCategorie(
-              e.target.value as "votes" | "contestants" | "stats"
-            )
-          }
-          value={selectedCategorie}
-          className="select"
-          id="pageSelect"
-        >
-          <option value="votes">votes</option>
-          <option value="contestants">contestant</option>
-          <option value="stats">stats</option>
-        </select></div>
-      </nav>
-      <label htmlFor="doubleVotes">Display double Votes</label>
-      <input
-        checked={displayDuplicateVotes}
-        onChange={() => setDisplayDuplicateVotes(!displayDuplicateVotes)}
-        type="checkbox"
-        name=""
-        id="doubleVotes"
+      <ProjectNav
+        connected={connected}
+        project={project as Project}
+        selectedCategorie={selectedCategorie}
+        setSelectedCategorie={setSelectedCategorie}
       />
+      <div className="filter">
+        <label htmlFor="doubleVotes">Display double Votes</label>
+        <input
+          checked={displayDuplicateVotes}
+          onChange={() => setDisplayDuplicateVotes(!displayDuplicateVotes)}
+          type="checkbox"
+          name=""
+          id="doubleVotes"
+        />
+        {categories &&
+          categories.map((categorie) => (
+            <span key={categorie.title}>
+              <label htmlFor={categorie.title}>{categorie.title}</label>
+              <select
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setNewCategorie(value, categorie, value == "");
+                }}
+                name={categorie.title}
+                id={categorie.title}
+              >
+                <option value={""}>Select...</option>
+                <option value={categorie.option1.key}>
+                  {categorie.option1.name}
+                </option>
+                <option value={categorie.option2.key}>
+                  {categorie.option2.name}
+                </option>
+              </select>
+            </span>
+          ))}
+      </div>
       <div className="split">
         <section>
           {selectedCategorie === "contestants" && (
-            <Table data={contestants} columns={dataContestant} />
+            <Table data={filterContestant} columns={dataContestant} />
           )}
           {selectedCategorie === "votes" && (
             <Table data={filteredVotes} columns={dataVotes} />
@@ -118,7 +131,7 @@ const ProjectOverview = () => {
           {selectedCategorie === "stats" && (
             <Stats
               displayDuplicateVotes={displayDuplicateVotes}
-              contestants={contestants}
+              contestants={filterContestant}
             />
           )}
         </section>
