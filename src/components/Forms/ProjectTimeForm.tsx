@@ -4,26 +4,52 @@ interface Props {
   newProject: Project;
   updateProject: (project: Project) => void;
 }
+const formatDateForInput = (date: Date): string => {
+  const isoString = date.toISOString();
+  return isoString.slice(0, 16);
+};
+
 const ProjectTimeForm = ({ newProject, updateProject }: Props) => {
   const handleStartTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputDate = new Date(e.target.value);
+    const utcDate = new Date(
+      Date.UTC(
+        inputDate.getFullYear(),
+        inputDate.getMonth(),
+        inputDate.getDate(),
+        inputDate.getHours(),
+        inputDate.getMinutes()
+      )
+    );
     updateProject({
       ...newProject,
       config: {
         ...newProject.config,
-        votingStartDayAndTime: new Date(e.target.value),
+        votingStartDayAndTime: utcDate,
       },
     });
   };
 
   const handleEndTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputDate = new Date(e.target.value);
+    const utcDate = new Date(
+      Date.UTC(
+        inputDate.getFullYear(),
+        inputDate.getMonth(),
+        inputDate.getDate(),
+        inputDate.getHours(),
+        inputDate.getMinutes()
+      )
+    );
     updateProject({
       ...newProject,
       config: {
         ...newProject.config,
-        votingEndDayAndTime: new Date(e.target.value),
+        votingEndDayAndTime: utcDate,
       },
     });
   };
+
   const handleTimeCheckboxChange = () => {
     updateProject({
       ...newProject,
@@ -33,6 +59,7 @@ const ProjectTimeForm = ({ newProject, updateProject }: Props) => {
       },
     });
   };
+
   return (
     <div>
       <div>
@@ -51,9 +78,9 @@ const ProjectTimeForm = ({ newProject, updateProject }: Props) => {
             <input
               type="datetime-local"
               id="startTime"
-              value={newProject.config.votingStartDayAndTime
-                .toISOString()
-                .slice(0, 16)}
+              value={formatDateForInput(
+                newProject.config.votingStartDayAndTime
+              )}
               onChange={handleStartTimeChange}
             />
           </div>
@@ -62,9 +89,7 @@ const ProjectTimeForm = ({ newProject, updateProject }: Props) => {
             <input
               type="datetime-local"
               id="endTime"
-              value={newProject.config.votingEndDayAndTime
-                .toISOString()
-                .slice(0, 16)}
+              value={formatDateForInput(newProject.config.votingEndDayAndTime)}
               onChange={handleEndTimeChange}
             />
           </div>
