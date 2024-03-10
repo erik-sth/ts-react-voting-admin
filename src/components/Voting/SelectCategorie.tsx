@@ -1,60 +1,51 @@
 import "./SelectCategorie.css";
-import { colorSelection } from "../../hooks/useProjects";
+import { Categories } from "../../hooks/useProjects";
 interface Props {
   selectedCategories: string[];
-  categories: {
-    key: string;
-    title: string;
-    color: colorSelection;
-  }[];
+  categorie: Categories;
 
-  setCategorie: (categories: string[]) => void;
+  setCategorie: (newCategorie: string, existingCategories: Categories) => void;
 }
 
 const SelectCategorie = ({
   selectedCategories,
   setCategorie,
-  categories,
+  categorie,
 }: Props) => {
-  function filterOut() {
-    return selectedCategories.filter(
-      (c) => c !== categories[0].key && c !== categories[1].key
-    );
-  }
   function isSelected(key: string): boolean {
     return (
       selectedCategories?.filter(
-        (sC) => sC === categories[0].key || sC === categories[1].key
+        (sC) => sC === categorie.option1.key || sC === categorie.option2.key
       )[0] === key
     );
   }
   function setToOption1() {
-    setCategorie([...filterOut(), categories[0].key]);
+    setCategorie(categorie.option1.key, categorie);
   }
   function setToOption2() {
-    setCategorie([...filterOut(), categories[1].key]);
+    setCategorie(categorie.option2.key, categorie);
   }
   return (
     <section className="categorie-input">
       <div
         className={
-          isSelected(categories[0].key)
-            ? `selectionBtn selectCategorie ${categories[0].color}`
+          isSelected(categorie.option1.key)
+            ? `selectionBtn selectCategorie ${categorie.option1.color}`
             : "selectionBtn"
         }
         onClick={setToOption1}
       >
-        {categories[0].title}
+        {categorie.option1.name}
       </div>
       <div
         className={
-          isSelected(categories[1].key)
-            ? `selectionBtn selectCategorie ${categories[1].color}`
+          isSelected(categorie.option2.key)
+            ? `selectionBtn selectCategorie ${categorie.option2.color}`
             : "selectionBtn "
         }
         onClick={setToOption2}
       >
-        {categories[1].title}
+        {categorie.option2.name}
       </div>
       <span className="selection"></span>
     </section>
