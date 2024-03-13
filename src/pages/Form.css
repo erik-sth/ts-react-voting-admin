@@ -1,0 +1,14 @@
+.form {
+  max-width: 300px;
+}
+form {
+  display: block;
+}
+label {
+  width: fit-content;
+}
+.input-container {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import apiClient from "../services/api-client";
 import { useNavigate } from "react-router-dom";
-
+import "./Form.css";
 interface LoginFormState {
   email: string;
   password: string;
@@ -37,10 +37,10 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="form">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="input-container">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -51,7 +51,7 @@ const LoginForm = () => {
             required
           />
         </div>
-        <div>
+        <div className="input-container">
           <label htmlFor="password">Password:</label>
           <input
             type="password"

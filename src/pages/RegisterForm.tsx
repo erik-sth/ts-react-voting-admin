@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import apiClient from "../services/api-client";
 import { useNavigate } from "react-router-dom";
+import "./Form.css";
 
 interface RegisterFormState {
   name: string;
@@ -36,10 +37,10 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="form">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="input-container">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -50,7 +51,7 @@ const RegisterForm: React.FC = () => {
             required
           />
         </div>
-        <div>
+        <div className="input-container">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -61,7 +62,7 @@ const RegisterForm: React.FC = () => {
             required
           />
         </div>
-        <div>
+        <div className="input-container">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
