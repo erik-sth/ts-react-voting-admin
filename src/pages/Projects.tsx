@@ -4,6 +4,7 @@ import "./Projects.css";
 import ProjectForm from "../components/Forms/ProjectForm";
 import Table, { ColumnProps } from "../components/Table";
 import { isBetween } from "../utils/time";
+import apiClient from "../services/api-client";
 
 const tableData: ColumnProps<Project>[] = [
   {
@@ -54,7 +55,10 @@ const Projects = () => {
 
   return (
     <div>
-      <h1>Projects</h1>
+      <h1>Projects</h1>{" "}
+      <button onClick={async () => await apiClient.post("/user/logout")}>
+        Logout
+      </button>
       <div className="split">
         <section>
           {data.length === 0 ? (
