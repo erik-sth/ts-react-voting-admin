@@ -25,7 +25,9 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await apiClient.post("/auth", formData);
+      const res = await apiClient.post("/auth", formData);
+
+      if (res) navigate("/admin");
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("Error:", error.message);
@@ -33,7 +35,6 @@ const LoginForm = () => {
         console.error("Unknown error occurred:", error);
       }
     }
-    navigate("/admin");
   };
 
   return (
