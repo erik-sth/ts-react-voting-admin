@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://bk-b-voting.onrender.com",
+  baseURL: "https://api.misplace.uk",
   withCredentials: true,
   params: {},
 });
