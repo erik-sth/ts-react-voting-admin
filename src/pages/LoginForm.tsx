@@ -1,6 +1,6 @@
 import { useState } from "react";
 import apiClient from "../services/api-client";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Form.css";
 interface LoginFormState {
   email: string;
@@ -8,7 +8,7 @@ interface LoginFormState {
 }
 
 const LoginForm = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<LoginFormState>({
     email: "",
     password: "",
@@ -25,9 +25,7 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await apiClient.post("/auth", formData);
-      // const res =
-      // if (res) navigate("/admin");
+      await apiClient.post("/auth", formData).then(() => navigate("/admin"));
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("Error:", error.message);

@@ -28,9 +28,7 @@ const RegisterForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await apiClient.post("/user", formData);
-      if (res) navigate("/admin");
-      navigate("/admin");
+      await apiClient.post("/user", formData).then(() => navigate("/admin"));
     } catch (error) {
       console.error("Error:", (error as Error).message);
     }
