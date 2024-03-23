@@ -1,6 +1,6 @@
 import Bar from "../components/Project/bar";
 import { AdminContestant } from "../hooks/useProjectOverviewHook";
-import "./Stats.css";
+import "./CSS/Stats.css";
 
 interface Props {
   contestants: AdminContestant[];
@@ -11,16 +11,20 @@ const Stats = ({ contestants, displayDuplicateVotes }: Props) => {
     (a, b) =>
       b.voteCount + b.duplicateVoteCount - (a.voteCount + a.duplicateVoteCount)
   );
-  if ( !displayDuplicateVotes)
+  if (!displayDuplicateVotes)
     sorted = contestants?.sort((a, b) => b.voteCount + -a.voteCount);
-  const maxScore = contestants[0]?.voteCount + contestants[0]?.duplicateVoteCount;
+  const maxScore =
+    contestants[0]?.voteCount + contestants[0]?.duplicateVoteCount;
   const maxWidth = 80 / maxScore;
   return (
     <div>
       <ul>
         {sorted?.map((c) => (
           <li key={c._id}>
-           <div className="name-container"> <div className="name">{c.name} :</div></div>
+            <div className="name-container">
+              {" "}
+              <div className="name">{c.name} :</div>
+            </div>
             <div className="bars">
               <Bar
                 color="blue"
@@ -37,7 +41,9 @@ const Stats = ({ contestants, displayDuplicateVotes }: Props) => {
             </div>
 
             <div className="score">
-              {displayDuplicateVotes ? c.duplicateVoteCount + c.voteCount: c.voteCount}
+              {displayDuplicateVotes
+                ? c.duplicateVoteCount + c.voteCount
+                : c.voteCount}
             </div>
           </li>
         ))}{" "}

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Table, { ColumnProps } from "../components/Table";
 import { Vote } from "../hooks/useVotes";
-import "./Projects";
+import "./CSS/Projects.css";
 import ContestantForm from "../components/Forms/ContestantForm";
 import useProjectOverviewHook, {
   AdminContestant,
 } from "../hooks/useProjectOverviewHook";
 import ProjectSettings from "../components/Forms/ProjectSettings";
-import "./ProjectOverview.css";
+import "./CSS/ProjectOverview.css";
 import Stats from "./Stats";
 import ProjectNav from "../components/Project/ProjectNav";
 import { Project } from "../hooks/useProjects";
