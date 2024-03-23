@@ -36,21 +36,22 @@ const ProjectSettings = ({ project }: Props) => {
             }
           }}
         />
-        <button
-          disabled={project.config.useTime}
-          className={
-            project.config.votingEnabled ? "open neutral" : "closed neutral"
-          }
-          onClick={() => {
-            if (project.config.votingEnabled) {
-              apiClient.put(`/project/lock/${project._id}`);
-            } else {
-              apiClient.put(`/project/unlock/${project._id}`);
+        {!project.config.useTime && (
+          <button
+            className={
+              project.config.votingEnabled ? "open neutral" : "closed neutral"
             }
-          }}
-        >
-          {project.config.votingEnabled ? "Lock voting" : "Unlock voting"}
-        </button>
+            onClick={() => {
+              if (project.config.votingEnabled) {
+                apiClient.put(`/project/lock/${project._id}`);
+              } else {
+                apiClient.put(`/project/unlock/${project._id}`);
+              }
+            }}
+          >
+            {project.config.votingEnabled ? "Lock voting" : "Unlock voting"}
+          </button>
+        )}
       </div>
       <div>
         <button
