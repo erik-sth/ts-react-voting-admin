@@ -21,30 +21,18 @@ const tableData: ColumnProps<Project>[] = [
     render(_, item) {
       const { useTime, votingStartDayAndTime, votingEndDayAndTime } =
         item.config;
-
-      if (useTime) {
-        const isVotingOpenByTime = isBetween(
-          new Date(votingStartDayAndTime),
-          new Date(votingEndDayAndTime),
-          new Date()
-        );
-
-        return (
-          <div>
-            {isVotingOpenByTime ? (
-              <span className="open">Voting is open by Time</span>
-            ) : (
-              <span className="closed">Voting is closed by Time</span>
-            )}
-          </div>
-        );
-      } else {
-        return item.config.votingEnabled ? (
-          <div className="open">Voting is open by Admin</div>
-        ) : (
-          <div className="closed">Voting is closed by Admin</div>
-        );
-      }
+      const isVotingOpenByTime = isBetween(
+        new Date(votingStartDayAndTime),
+        new Date(votingEndDayAndTime),
+        new Date()
+      );
+      if (useTime && isVotingOpenByTime)
+        return <span className="open">Voting is open by Time</span>;
+      if (useTime && !isVotingOpenByTime)
+        return <span className="closed">Voting is closed by Time</span>;
+      if (!useTime && item.config.votingEnabled)
+        return <div className="open">Voting is open by Admin</div>;
+      return <div className="closed">Voting is closed by Admin</div>;
     },
   },
 ];
