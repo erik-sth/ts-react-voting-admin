@@ -30,6 +30,9 @@ export type ServerExpectedProjectData = Pick<
   "name" | "config" | "categories"
 >;
 
-const useProjects = (projectId?: string) =>
-  useData<Project, ServerExpectedProjectData>("/project" + (projectId || ""));
+const useProjects = (projectId: string, pageNumber: number, pageLimit: number ) =>
+  useData<Project, ServerExpectedProjectData>("/project" + (projectId), {params: {
+    page: pageNumber, 
+    limit: pageLimit
+  }}, [pageNumber, pageLimit]);
 export default useProjects;

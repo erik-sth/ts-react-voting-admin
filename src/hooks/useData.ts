@@ -14,7 +14,7 @@ interface EntityWithId {
 const useData = <T extends EntityWithId, TServerExpected>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
-  deps?: never[]
+  deps: readonly unknown[] = []
 ) => {
   const [data, setData] = useState<T[]>([]);
   const [count, setCount] = useState<number>(0);
@@ -50,7 +50,8 @@ const useData = <T extends EntityWithId, TServerExpected>(
       isMounted = false;
       controller.abort();
     };
-  }, [endpoint, requestConfig, deps]); // Added dependencies
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...deps, endpoint]); 
 
   const create = async (entity: TServerExpected) => {
     try {
