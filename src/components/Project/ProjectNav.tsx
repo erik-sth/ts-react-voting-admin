@@ -26,7 +26,7 @@ const ProjectNav = ({
         <a
           className="extLinkBtn"
           aria-label="Open voting page..."
-          href={`//${window.location.hostname}/${project._id}`}
+          href={`https://${window.location.hostname}/${project._id}`}
         >
           <img src={extLinkSvg} className="extLink" alt="" />
         </a>
