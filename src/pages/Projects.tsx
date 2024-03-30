@@ -4,7 +4,8 @@ import "./CSS/Projects.css";
 import ProjectForm from "../components/Forms/ProjectForm";
 import Table, { ColumnProps } from "../components/Table";
 import { isBetween } from "../utils/time";
-import apiClient from "../services/api-client";
+import Paginate from "../components/Paginate";
+import { useState } from "react";
 
 const tableData: ColumnProps<Project>[] = [
   {
@@ -36,17 +37,16 @@ const tableData: ColumnProps<Project>[] = [
     },
   },
 ];
-
+const CURRENT_LIMIT = 20
 const Projects = () => {
-  const { data, isLoading, create } = useProjects();
-  if (isLoading) return <h1>Loading</h1>;
 
+  const [page, setPage] = useState(1);
+  const { data, isLoading, create, count } = useProjects("", page, CURRENT_LIMIT);
+  if (isLoading) return <h1>Loading</h1>;
   return (
     <div>
       <h1>Projects</h1>
-      <button onClick={async () => await apiClient.post("/user/logout")}>
-        Logout
-      </button>
+      <p>You have access to {count} projects.</p>
       <div className="split">
         <section>
           {data.length === 0 ? (
@@ -58,7 +58,9 @@ const Projects = () => {
         <section>
           <ProjectForm create={create} />
         </section>
+
       </div>
+      <Paginate currentLimit={CURRENT_LIMIT} count={count} currentPageNumber={page} setPage={setPage} isLoading={false} />
     </div>
   );
 };
