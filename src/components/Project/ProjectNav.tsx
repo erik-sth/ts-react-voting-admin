@@ -14,6 +14,8 @@ const ProjectNav = ({
   setSelectedCategorie,
   selectedCategorie,
 }: Props) => {
+  const hostname = window.location.hostname;
+const domainParts = hostname.split('.').slice(-2).join('.');
   return (
     <nav>
       <h1>
@@ -26,7 +28,7 @@ const ProjectNav = ({
         <a
           className="extLinkBtn"
           aria-label="Open voting page..."
-          href={`https://${window.location.hostname}/${project._id}`}
+          href={`https://${domainParts}/${project._id}`}
         >
           <img src={extLinkSvg} className="extLink" alt="" />
         </a>
