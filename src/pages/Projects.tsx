@@ -12,7 +12,7 @@ const tableData: ColumnProps<Project>[] = [
     title: "Id",
     key: "_id",
     render(_, item) {
-      return <Link to={`/admin/${item._id}`}>{item._id}</Link>;
+      return <Link to={`/${item._id}`}>{item._id}</Link>;
     },
   },
   { title: "Name", key: "name" },
