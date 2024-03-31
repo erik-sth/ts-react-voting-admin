@@ -16,11 +16,11 @@ const router = createBrowserRouter([
     element: <RegisterForm />,
   },
   {
-    path: "/admin",
+    path: "/",
     element: <Projects />,
   },
   {
-    path: "/admin/:projectId",
+    path: "/:projectId",
     element: <ProjectOverview />,
   },
 ]);
