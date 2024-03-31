@@ -5,7 +5,7 @@ const Nav = () => {
   return (
     <nav>
       <h1>Voting</h1>
-      <button onClick={async () => await apiClient.post("/user/logout")}>
+      <button onClick={async () => await apiClient.post("/user/logout").then(()=> window.location.href="/login")}>
         Logout
       </button>
     </nav>
