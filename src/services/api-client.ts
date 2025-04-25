@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://api.misplace.uk",
+  baseURL: "https://api.prod1.uk",
   withCredentials: true,
   params: {},
 });
